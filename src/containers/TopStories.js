@@ -1,7 +1,6 @@
 
 import React, {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   View,
@@ -10,13 +9,28 @@ import React, {
   Navigator
 } from 'react-native';
 
-var Progress = require('react-native-progress');
-var Icon = require('react-native-vector-icons/EvilIcons');
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Progress from 'react-native-progress'
+import Icon from 'react-native-vector-icons/EvilIcons'
 
 import Loading from '../components/Loading'
 import Toolbar from '../components/Toolbar'
+import { actions as topStories } from '../redux/modules/topStories'
 
-export default class TopStories extends Component {
+
+const mapStateToProps = (state) => ({
+  ...state
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+    topStories: bindActionCreators(topStories, dispatch)
+  }
+}
+
+export class TopStories extends React.Component {
 
   constructor(props) {
     super(props);
@@ -32,13 +46,19 @@ export default class TopStories extends Component {
 
   _onFetchDataSuccess () {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let randomData = [ Math.random(), Math.random(), Math.random() ];
+    let randomData = [
+      {name: 'Hello', value: Math.random()},
+      {name: 'World', value: Math.random()},
+      {name: 'paps', value: Math.random()},
+    ];
 
     this.setState({
       ...this.state,
       loading: false,
       dataSource: ds.cloneWithRows(randomData)
     });
+
+    this.props.topStories.fetchTopStories();
   }
 
   _onFetchData () {
@@ -46,7 +66,7 @@ export default class TopStories extends Component {
       ...this.state,
       loading: true
     });
-    setTimeout( () => this._onFetchDataSuccess(), 1000);
+    setTimeout( () => this._onFetchDataSuccess(), 400);
   }
 
   fetchDataList() {
@@ -63,7 +83,11 @@ export default class TopStories extends Component {
           this.state.dataSource &&
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <Text style={styles.list}>{rowData}</Text>}
+            renderRow={(rowData) =>
+              <View style={styles.listViewItem}>
+                <Text>{rowData.value}</Text>
+              </View>
+            }
           />
         }
         {this.state.loading &&
@@ -81,5 +105,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     backgroundColor: '#eaeaea',
+  },
+  listViewItem: {
+    padding: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e1e1e1'
   }
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopStories);

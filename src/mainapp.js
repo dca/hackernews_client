@@ -11,17 +11,23 @@ import React, {
   View
 } from 'react-native';
 
+import { Provider } from 'react-redux'
+
 import TopStories from './containers/TopStories'
+import configureStore from './redux/configureStore'
+
+const store = configureStore({ initialState: {}, history: null })
+
 
 export default function native(platform: string) {
 
-  let hackernews_client = React.createClass( {
-    render() {
-      return (
+  const wrapper = () => {
+    return (
+      <Provider store={store}>
         <TopStories />
-      );
-    }
-  });
+      </Provider>
+    )
+  }
 
-  AppRegistry.registerComponent('hackernews_client', () => hackernews_client);
+  AppRegistry.registerComponent('hackernews_client', () => wrapper);
 }
