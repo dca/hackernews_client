@@ -18,7 +18,7 @@ export default class Toolbar extends Component {
     return (
       <View style={styles.toolbar}>
         <Text style={styles.toolbarButton}>Add</Text>
-        <Text style={styles.toolbarTitle}>This is the title</Text>
+        <Text style={styles.toolbarTitle}>This is the title 222</Text>
         {/*<Text style={styles.toolbarButton}>Reload</Text>*/}
         <View style={styles.toolbarButton}>
           <Icon.Button name="redo" size={20} color="#fafafa"

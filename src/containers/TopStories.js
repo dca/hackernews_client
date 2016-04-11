@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Progress from 'react-native-progress'
 import Icon from 'react-native-vector-icons/EvilIcons'
+import codePush from 'react-native-code-push';
 
 import Loading from '../components/Loading'
 import Toolbar from '../components/Toolbar'
@@ -41,6 +42,7 @@ export class TopStories extends React.Component {
   }
 
   componentDidMount() {
+    codePush.sync();
     this._onFetchData();
   }
 

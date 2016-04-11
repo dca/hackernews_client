@@ -11,6 +11,8 @@
 
 #import "RCTRootView.h"
 
+#import "CodePush.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -41,8 +43,20 @@
    * simulator in the "Release" build configuration.
    */
 
+// 原本的 Production 設定
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
+// CodePush Production 設定
+//   jsCodeLocation = [CodePush bundleURL];
+
+  //
+//  #ifdef DEBUG
+//    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+//  #else
+//    jsCodeLocation = [CodePush bundleURL];
+//  #endif
+  
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"hackernews_client"
                                                initialProperties:nil
