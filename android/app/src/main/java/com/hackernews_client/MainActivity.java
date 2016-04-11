@@ -29,6 +29,11 @@ public class MainActivity extends ReactActivity {
         return BuildConfig.DEBUG;
     }
 
+    @Override
+    protected String getJSBundleFile() {
+        return CodePush.getBundleUrl();
+    }
+
     /**
      * A list of packages used by the app. If the app uses additional views
      * or modules besides the default ones, add more packages here.
@@ -37,7 +42,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new CodePush(${androidDeploymentKey}, this, BuildConfig.DEBUG),
+            new CodePush("j_GNiDYENAPRK5SMYtrXWz2YVGClEJWg2GnHjGx", this, BuildConfig.DEBUG),
             new VectorIconsPackage()
         );
     }

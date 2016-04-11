@@ -76,7 +76,7 @@ export class TopStories extends React.Component {
   }
 
   render() {
-    console.log('this.state.dataSource', this.state);
+    //console.log('this.state.dataSource', this.state);
     return (
       <View style={styles.container}>
         <Toolbar onPressReload={this.fetchDataList.bind(this)} />

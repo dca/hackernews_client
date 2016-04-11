@@ -16,7 +16,7 @@ export const fetchTopStories = () => {
     fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
+        //console.log(responseJson);
         dispatch(_fetchTopStories({topStories: responseJson}))
       })
       .catch((error) => {
